@@ -1,7 +1,11 @@
 package com.movies.Service;
 
-import org.springframework.stereotype.Service;
 import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.movies.exception.InvalidDataException;
+import com.movies.exception.NotFoundException;
 import com.movies.model.Movie;
 import com.movies.repo.MovieRepository;
 
@@ -16,19 +20,19 @@ public class MovieService {
 
     public Movie create(Movie movie) {
         if (movie == null) {
-            throw new RuntimeException("Invalid Movie");
+            throw new InvalidDataException("Invalid Movie null ");
         }
         return repo.save(movie);
     }
 
     public Movie read(Long id) {
         return repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Movie not found"));
+                .orElseThrow(() -> new NotFoundException("Movie not found" + id));
     }
 
     public Movie update(Long id, Movie update) {
         Movie movie = repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Movie not found"));
+                .orElseThrow(() -> new NotFoundException("Movie not found"));
 
         movie.setName(update.getName());
         movie.setDirector(update.getDirector());
@@ -38,7 +42,12 @@ public class MovieService {
     }
 
     public void delete(Long id) {
-        repo.deleteById(id);
+         if(repo.existsById(id)) {
+        	 repo.deleteById(id);
+         }else {
+        	 throw new NotFoundException("movie not found ");
+
+    }
     }
 
     public List<Movie> getAll() {

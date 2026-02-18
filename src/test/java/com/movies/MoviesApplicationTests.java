@@ -87,11 +87,12 @@ class MoviesApplicationTests {
         movie.setName("bhahubali");
         movie.setDirector("ss RajaMouli");
         movie.setActors(List.of("Prabhas","NTR","Alliabhat"));
+        
 
         Movie saved = movieRepository.saveAndFlush(movie);
-
+        
         movie.setActors(List.of("Prabhas","NTR","Alliabhat","Ajaydevgan"));
-
+        
         mvc.perform(put("/movies/{id}", saved.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(movie)))
