@@ -103,6 +103,16 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					 <image>
+                    <name>docker.io/mustishanthinivas/${project.artifactId}:${project.version}}</name>
+                    <publich>true</publich>
+                    </image>
+                    <docker>
+                    <publishRegistry>
+                      <username>${env.DOCKERHUB_USER}</username>
+                      <password>${env.DOCKERHUB_PWD}</password>
+                    </publishRegistry>
+                    </docker>
 				</configuration>
 			</plugin>
 		</plugins>
