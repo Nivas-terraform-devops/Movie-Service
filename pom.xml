@@ -104,7 +104,7 @@
 						</exclude>
 					</excludes>
 					 <image>
-                    <name>docker.io/mustishanthinivas/${project.artifactId}:${project.version}}</name>
+                    <name>docker.io/mustishanthinivas/${project.artifactId}:${project.version}</name>
                     <publich>true</publich>
                     </image>
                     <docker>
